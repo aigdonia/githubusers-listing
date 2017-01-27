@@ -1,0 +1,4 @@
+- [] Create Directory structure -- scalable (feature)
+- [] Grunt + Jade, Sass, ES Linter (airbnb style)
+- [] bower
+    - angular-ui-router

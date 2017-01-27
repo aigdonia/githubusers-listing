@@ -1,0 +1,10 @@
+#github-users
+  section.column.large-3.medium-3.users-list
+    span.users-list__heading Github Users
+    section.users-list__item(ng-repeat='user in ctrl.usersList', ui-sref='ghusers.details({login: user.login})')
+      img(src='{{::user.avatar_url}}')
+      div
+        h4(ng-bind='::user.login')
+    a.users-list__item.load-more(ng-click='ctrl.loadMore()', ng-if='!!ctrl.loadMoreUrl') Load More
+  section.column.large-9.medium-9.user-details(ui-view='')
+    span Details Goes Here

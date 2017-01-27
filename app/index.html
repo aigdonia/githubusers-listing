@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app='github-users'>
+  <head>
+    <meta charset="utf-8">
+    <!-- build:css(.) assets/styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <link rel="stylesheet" href="bower_components/foundation-sites/dist/css/foundation.css" media="screen" charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:500|Roboto:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/app.css" media="screen" charset="utf-8">
+
+    <title ng-bind="'Github Users - ' + pageTitle">Github Users</title>
+  </head>
+  <body>
+    <header class='navigation top-bar'>
+      <div class='top-bar-left'>
+        <div class='menu-text logo'> Github Users </div>
+      </div>
+      <nav class='top-bar-right'>
+        <ul class='menu'>
+          <li> <a ui-sref="homepage">Home</a> </li>
+          <li> <a ui-sref="ghusers">Users</a> </li>
+          <li> <a ui-sref="aboutpage">About</a> </li>
+        </ul>
+      </nav>
+    </header>
+    <article ui-view=''></article>
+  </body>
+  <!-- build:js(.) assets/js/vendor.js -->
+  <!-- bower:js -->
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="../bower_components/lodash/lodash.js"></script>
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/what-input/dist/what-input.js"></script>
+  <script src="../bower_components/foundation-sites/dist/js/foundation.js"></script>
+  <script src="../bower_components/angular-mocks/angular-mocks.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) assets/js/scripts.js -->
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="app.config.js"></script>
+  <!-- inject-scripts -->
+  <script src="modules/staticPages/module.js" ></script>
+  <script src="modules/users/module.js" ></script>
+  <script src="modules/users/users-list.controller.js" ></script>
+  <script src="modules/users/users.service.js" ></script>
+  <!-- end inject-scripts -->
+  <!-- endbuild -->
+</html>

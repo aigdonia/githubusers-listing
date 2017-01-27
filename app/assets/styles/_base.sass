@@ -1,0 +1,36 @@
+body
+  font: 400 16px/26px $base-font
+  background-color: $background-color
+  color: $black
+
+a
+  color: $blue
+  &:hover
+    text-decoration: none
+    color: darken($blue, 10)
+
+header.navigation
+  background-color: lighten($blue, 5)
+  // margin-bottom: 15px
+
+  .logo
+    font-size: 18px
+    margin-left: 20px
+    position: relative
+    &:before
+      margin-right: 20px
+      content: ''
+      display: block
+      background:
+        image: url('../images/GitHub-Mark-64px.png')
+        size: contain
+      position: absolute
+      width: 18px
+      height: 18px
+      left: -5px
+      top: 11px
+
+  a
+    font-weight: 300
+    color: $white
+    background-color: transparent
