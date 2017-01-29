@@ -13,17 +13,20 @@
         templateUrl: 'modules/users/main.html',
         controller: 'UsersListController as ctrl',
         resolve: {
-          ghUsers : function($q, GithubUsers){
-            var deferred = $q.defer();
-            var remoteGH = GithubUsers.fetchRemoteGithubUsers();
-
-            return remoteGH;
+          ghUsers : function(GithubUsers){
+            return GithubUsers.fetchRemoteGithubUsers();
           }
         }
       })
       .state('ghusers.details', {
         url: '/{login}',
-        templateUrl: 'modules/users/single.html'
+        templateUrl: 'modules/users/single.html',
+        controller: 'SingleUserController as ctrl',
+        resolve: {
+          user: function(SingleGithubUser, $stateParams){
+            return SingleGithubUser.fetchGithubUser($stateParams.login);
+          }
+        }
       });
   }
 })();

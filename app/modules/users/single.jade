@@ -1,1 +1,17 @@
-h1 User
+article.single-user
+  section.single-user__header
+    img(src='{{::ctrl.currentUser.avatar_url}}')
+    h2(ng-bind='::ctrl.currentUser.name')
+    small(ng-bind='::ctrl.currentUser.login')
+  section.single-user__details.large-offset-2.large-8
+    dl
+      dt Email
+      dd(ng-bind='::ctrl.currentUser.email')
+      dt Joined at
+      dd(ng-bind="::ctrl.currentUser.created_at | date:'dd, MMM yyyy'")
+  section.single-user__details.single-user__details--statistics.large-offset-2.large-8
+    ul
+      li(ng-repeat='(title, value) in ctrl.currentUser.stats')
+        div.single-user__details__numeric
+          label {{title}}
+          span {{value | shortyNumbers}}

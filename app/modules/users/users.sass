@@ -49,3 +49,53 @@
   // .user-details
   //   // width: 80vw
   //   background-color: green
+
+  .single-user
+    padding-top: 30px
+    &__header
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-direction: column
+
+      img
+        width: 220px
+
+      h2
+        margin: 0
+        font-size: 2rem
+        font-family: $alter-font
+        font-weight: 300
+
+      small
+        font-size: 1.3rem
+        color: lighten($black, 25)
+
+    &__details
+      margin-top: 10px
+      padding-top: 12px
+      border-top: 1px solid transparentize($black, 0.4)
+
+      dl dt
+        margin-bottom: 0
+        font-family: $alter-font
+
+      &--statistics
+        ul
+          display: flex
+          justify-content: space-between
+          margin: 0
+          padding: 0
+          list-style: none
+          li
+            width: 25%
+            text-align: center
+
+      &__numeric
+        label
+          font-size: 0.8rem
+          text-transform: uppercase
+        span
+          font-size: 2.3rem
+          font-weight: 300
+          font-family: $alter-font

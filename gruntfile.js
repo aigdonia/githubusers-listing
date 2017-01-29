@@ -26,7 +26,7 @@
         },
         jsTest : {
           files: ['app/{components,modules}/**/*.spec.js'],
-          tasks: ['jshint:test','karma:unit:run']
+          tasks: ['jshint:test']
         },
         livereload: {
           options: {
@@ -158,7 +158,7 @@
         unit: {
           configFile : 'karma.conf.js',
           port: 9013,
-          autoWatch: false,
+          autoWatch: true,
           background: true
         }
       }
@@ -181,7 +181,7 @@
       grunt.task.run([
         'jshint:test',
         'karma:unit',
-        'watch'
+        'watch:jsTest'
       ]);
     });
   };
