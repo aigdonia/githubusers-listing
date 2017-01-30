@@ -13,8 +13,18 @@
         templateUrl: 'modules/users/main.html',
         controller: 'UsersListController as ctrl',
         resolve: {
-          ghUsers : function(GithubUsers){
+          ghUsersPreloaded : function(GithubUsers){
             return GithubUsers.fetchRemoteGithubUsers();
+          },
+          userPreloaded: function(SingleGithubUser, $rootScope, $state){
+            $rootScope.loadingUser = true;
+            return SingleGithubUser.fetchGithubUser('aigdonia')
+              .catch(function(error){
+                $state.go('whoops');
+              })
+              .finally(function(){
+                $rootScope.loadingUser = false;
+              });
           }
         }
       })
@@ -23,8 +33,12 @@
         templateUrl: 'modules/users/single.html',
         controller: 'SingleUserController as ctrl',
         resolve: {
-          user: function(SingleGithubUser, $stateParams){
-            return SingleGithubUser.fetchGithubUser($stateParams.login);
+          user: function(SingleGithubUser, $stateParams, $rootScope){
+            $rootScope.loadingUser = true;
+            return SingleGithubUser.fetchGithubUser($stateParams.login)
+              .finally(function(){
+                $rootScope.loadingUser = false;
+              });
           }
         }
       });

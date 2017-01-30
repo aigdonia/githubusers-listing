@@ -28,7 +28,9 @@
               }
             });
           },
-          function(){}
+          function(error){
+            defer.reject(error);
+          }
         );
       }
 

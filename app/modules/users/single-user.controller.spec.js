@@ -35,7 +35,7 @@
       "following": 6,
       "created_at": "2011-11-11T08:35:05Z",
       "updated_at": "2016-11-27T10:24:10Z"
-    };
+    }; 
 
     beforeEach( module('github-users') );
     beforeEach(inject(function($controller){

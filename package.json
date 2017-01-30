@@ -9,6 +9,7 @@
   "author": "Ahmed Gaber <aigdonia@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^6.7.1",
     "grunt": "^1.0.1",
     "grunt-angular-templates": "^1.1.0",
     "grunt-contrib-clean": "^1.0.0",
@@ -23,6 +24,7 @@
     "grunt-karma": "^2.0.0",
     "grunt-newer": "^1.2.0",
     "grunt-ng-annotate": "^3.0.0",
+    "grunt-postcss": "^0.8.0",
     "grunt-sass": "^2.0.0",
     "grunt-wiredep": "^3.0.1",
     "jasmine": "^2.5.3",

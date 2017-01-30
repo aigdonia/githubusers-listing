@@ -24,6 +24,10 @@
           files : ['app/assets/styles/*.sass', 'app/{components,modules}/**/*.sass'],
           tasks : ['injector:sass','sass']
         },
+        css: {
+          files: ['.tmp/assets/styles/*.css'],
+          tasks: ['postcss']
+        },
         jsTest : {
           files: ['app/{components,modules}/**/*.spec.js'],
           tasks: ['jshint:test']
@@ -126,6 +130,16 @@
           }
         }
       },
+      postcss: {
+        options: {
+          preprocessor: [
+            require('autoprefixer')({browsers: 'last 2 versions'})
+          ]
+        },
+        server: {
+          src: '.tmp/assets/styles/*.css'
+        }
+      },
       jshint:{
         options: {
           reporter: require('jshint-stylish')
@@ -171,6 +185,7 @@
         'injector:js',
         'jade',
         'sass',
+        'postcss',
         'connect:server',
         'watch'
       ]);
