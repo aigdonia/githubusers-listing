@@ -1,9 +1,8 @@
 (function(){
   'use strict';
 
-  describe('Users Listing Controller', function(){
-
-    var usersListController;
+  describe('Users List Factory', function(){
+    var usersFactory;
     var mockedUsersList = [
         {
           "login": "mojombo",
@@ -82,47 +81,64 @@
           "site_admin": false
         }
     ];
-    var mockedMoreUrl = "https://api.github.com/users?since=";
-    var mockedGithubUsersFactory = {
-        fetchRemoteGithubUsers: function(url){}
-      };
-
-    var mockedResponse = {
-      usersList: _.chunk(mockedUsersList,2)[0],
-      moreUrl: mockedMoreUrl+"3"
-    };
+    var httpBackend;
     beforeEach(module('github-users'));
-    beforeEach(inject(function($controller, $q){
-      spyOn(mockedGithubUsersFactory, 'fetchRemoteGithubUsers').and.callFake(function(url){
-        var nextPageMock = {
-          usersList: _.chunk(mockedUsersList,2)[1],
-          moreUrl: mockedMoreUrl+"5"
-        };
-        return {
-          then: function(cb) { return cb(nextPageMock); }
-        };
-      });
 
-      usersListController = $controller('UsersListController', {
-        ghUsers:mockedResponse,
-        GithubUsers: mockedGithubUsersFactory
-      });
+    beforeEach(inject(function($httpBackend, GithubUsers){
+      usersFactory = GithubUsers;
+      httpBackend = $httpBackend;
+      $httpBackend.when('GET', 'https://api.github.com/users')
+        .respond(
+          _.chunk(mockedUsersList,2)[0],
+          {
+            'Link' :
+              '<https://api.github.com/users?since=3>; rel="next", <https://api.github.com/users{?since}>; rel="first"'
+          }
+        );
     }));
-    //function UsersListController(ghUsers, GithubUsers){
 
-    it('SHOULD be initiated with users list', function(){
-      expect(usersListController.usersList).toBeDefined();
+    it('SHOULD be initiated already', function(){
+      expect(usersFactory).toBeDefined();
     });
 
-    it('load more url SHOULD be exist to load next page', function(){
-      expect(usersListController.loadMoreUrl).toBeDefined();
+    it('fetchRemoteGithubUsers SHOULD provide processed array of users', function(){
+      var usersFactorizedResponse;
+      usersFactory.fetchRemoteGithubUsers().then(function(response){
+        usersFactorizedResponse = response;
+      });
+      httpBackend.flush();
+      expect(usersFactorizedResponse.usersList.length).toBe(2);
     });
 
-    it('invoke LoadMore function SHOULD return the next page content including loadMoreUrl, and add the new entried to usersList', function(){
-      expect(usersListController.usersList.length).toBe(2);
-      usersListController.loadMore();
-      expect(usersListController.usersList.length).toBe(4);
+    it('fetchRemoteGithubUsers SHOULD provide URL for next request page', function(){
+      var usersFactorizedResponse;
+      usersFactory.fetchRemoteGithubUsers().then(function(response){
+        usersFactorizedResponse = response;
+      });
+      httpBackend.flush();
+      expect(usersFactorizedResponse.moreUrl).toBeDefined();
     });
 
+    it('fetchRemoteGithubUsers with passed parameter SHOULD invoke the next page and return next users details, and link to next page', function(){
+      // mocked Ajax Call
+      httpBackend.when('GET', 'https://api.github.com/users?since=3')
+        .respond(
+          _.chunk(mockedUsersList,2)[1],
+          {
+            'Link' :
+              '<https://api.github.com/users?since=5>; rel="next", <https://api.github.com/users{?since}>; rel="first"'
+          }
+        );
+
+
+      var usersFactorizedResponse;
+      usersFactory.fetchRemoteGithubUsers("https://api.github.com/users?since=3")
+        .then(function(response){
+          usersFactorizedResponse = response;
+        });
+      httpBackend.flush();
+      expect(usersFactorizedResponse.usersList).toBeDefined();
+      expect(usersFactorizedResponse.moreUrl).toBeDefined();
+    });
   });
 })();

@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('github-users', [
-    'ui.router'
+    'ui.router',
+    'angular-ladda'
   ])
   .run(runApp);
 
@@ -13,7 +14,6 @@
     $rootScope.$on('$stateChangeStart', keepSiteTitleUpdated);
 
     function keepSiteTitleUpdated(e, toState, toParams, fromState){
-      console.log(e, toState, toParams, fromState);
     }
   }
 })();

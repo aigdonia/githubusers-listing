@@ -20,7 +20,8 @@
     "angular-ui-router": "^0.4.2",
     "lodash": "^4.17.4",
     "foundation-sites": "^6.3.0",
-    "angular-mocks": "^1.6.1"
+    "angular-mocks": "^1.6.1",
+    "angular-ladda": "^0.4.3"
   },
   "appPath": "app"
 }

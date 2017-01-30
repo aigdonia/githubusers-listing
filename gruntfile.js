@@ -158,8 +158,7 @@
         unit: {
           configFile : 'karma.conf.js',
           port: 9013,
-          autoWatch: true,
-          background: true
+          singleRun: true
         }
       }
     });
@@ -180,8 +179,7 @@
     grunt.registerTask('test', function(){
       grunt.task.run([
         'jshint:test',
-        'karma:unit',
-        'watch:jsTest'
+        'karma:unit'
       ]);
     });
   };
